@@ -9,4 +9,6 @@ RUN adduser -S -D -H -h /app appuser
 USER appuser
 COPY --from=builder /go/src/build/main /app/
 WORKDIR /app
+ENV PORT 5000
+EXPOSE 5000
 CMD ["./main"]
