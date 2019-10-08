@@ -26,12 +26,9 @@ func webhookClientHandler(w http.ResponseWriter, r *http.Request) {
 		userParts := strings.Split(parts[1], "|")
 		userID := userParts[0][2:]
 		profile, _ := getProfileImage(userID)
-		fmt.Println(profile.Profile.Image512)
-		err := downloadImage(fmt.Sprintf("/app/tmp/%s.jpg", userID), profile.Profile.Image512)
-		fmt.Println(err, fmt.Sprintf("/tmp/%s.jpg", userID))
+		downloadImage(fmt.Sprintf("/app/tmp/%s.jpg", userID), profile.Profile.Image512)
 		processImage(userID)
 		imageURL := fmt.Sprintf("%s/static/%s.png", domain, userID)
-		fmt.Println(imageURL)
 		postResponseImage(responseURL, fmt.Sprintf("relax %s, everything will be alright", parts[1]), imageURL)
 	} else {
 		postResponseText(responseURL, "command unrecognized")

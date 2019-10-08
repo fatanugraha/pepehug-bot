@@ -68,8 +68,7 @@ func downloadImage(filepath string, url string) error {
 	}
 	defer out.Close()
 
-	written, err := io.Copy(out, resp.Body)
-	fmt.Println("written", written)
+	_, err = io.Copy(out, resp.Body)
 	return err
 }
 
@@ -80,7 +79,6 @@ func processImage(userID string) {
 	backgroundPath := fmt.Sprintf("%s/assets/back.png", dir)
 	handPath := fmt.Sprintf("%s/assets/top.png", dir)
 	resultPath := fmt.Sprintf("%s/static/%s.png", dir, userID)
-	fmt.Println(resultPath, handPath, backgroundPath, photoPath, photoResizedPath)
 	exec.Command("convert", photoPath, "-resize", "160", photoResizedPath).Run()
 	exec.Command("convert", "-background", "rgba(0,0,0,0)", "-rotate", "335", photoResizedPath, photoResizedPath).Run()
 	exec.Command("composite", "-geometry", "+40+260", photoResizedPath, backgroundPath, resultPath).Run()
