@@ -25,7 +25,7 @@ func doHug(user string, responseURL string) {
 	userParts := strings.Split(user, "|")
 	userID := userParts[0][2:]
 
-	if !IsLetter(userID) || len(userID) != 9 {
+	if !IsLetter(userID) || len(userID) <= 12 {
 		postResponseText(responseURL, "usage: /pepe hug @person")
 		return
 	}
