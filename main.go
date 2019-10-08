@@ -14,7 +14,7 @@ var domain = os.Getenv("DOMAIN")
 
 func IsLetter(s string) bool {
 	for _, r := range s {
-		if (r < 'a' || r > 'z') && (r < 'A' || r > 'Z') {
+		if (r < 'a' || r > 'z') && (r < 'A' || r > 'Z') && (r < '0' || r > '9') {
 			return false
 		}
 	}
@@ -25,7 +25,7 @@ func doHug(user string, responseURL string) {
 	userParts := strings.Split(user, "|")
 	userID := userParts[0][2:]
 
-	if !IsLetter(userID) || len(userID) <= 12 {
+	if !IsLetter(userID) || len(userID) != 9 {
 		postResponseText(responseURL, "usage: /pepe hug @person")
 		return
 	}
