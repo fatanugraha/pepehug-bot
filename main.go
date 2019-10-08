@@ -26,8 +26,7 @@ func webhookClientHandler(w http.ResponseWriter, r *http.Request) {
 		userParts := strings.Split(parts[1], "|")
 		userID := userParts[0][2:]
 		profile, _ := getProfileImage(userID)
-		err := downloadImage(fmt.Sprintf("./tmp/%s.jpg", userID), profile.Profile.Image512)
-		fmt.Println(err)
+		downloadImage(fmt.Sprintf("/tmp/%s.jpg", userID), profile.Profile.Image512)
 		processImage(userID)
 		imageURL := fmt.Sprintf("%s/static/%s.png", domain, userID)
 		fmt.Println(imageURL)
