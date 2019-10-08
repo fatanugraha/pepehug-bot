@@ -68,7 +68,8 @@ func downloadImage(filepath string, url string) error {
 	}
 	defer out.Close()
 
-	_, err = io.Copy(out, resp.Body)
+	written, err = io.Copy(out, resp.Body)
+	fmt.Println("written", written)
 	return err
 }
 
