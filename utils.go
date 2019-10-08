@@ -74,8 +74,8 @@ func downloadImage(filepath string, url string) error {
 
 func processImage(userID string) {
 	dir, _ := os.Getwd()
-	photoPath := fmt.Sprintf("/tmp/%s.jpg", userID)
-	photoResizedPath := fmt.Sprintf("/tmp/%s_200.png", userID)
+	photoPath := fmt.Sprintf("/app/tmp/%s.jpg", userID)
+	photoResizedPath := fmt.Sprintf("/app/tmp/%s_200.png", userID)
 	backgroundPath := fmt.Sprintf("%s/assets/back.png", dir)
 	handPath := fmt.Sprintf("%s/assets/top.png", dir)
 	resultPath := fmt.Sprintf("%s/static/%s.png", dir, userID)
