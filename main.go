@@ -27,6 +27,7 @@ func doHug(user string, responseURL string) {
 
 	if !IsLetter(userID) || len(userID) != 9 {
 		postResponseText(responseURL, "usage: /pepe hug @person")
+		return
 	}
 
 	profile, _ := getProfileImage(userID)
