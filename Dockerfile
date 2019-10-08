@@ -9,7 +9,7 @@ RUN adduser -S -D -H -h /app appuser
 
 COPY --from=builder /go/src/build/main /app/
 COPY --from=builder /go/src/build/assets /app/assets
-RUN chown mkdir /app/tmp && \
+RUN mkdir /app/tmp && \
     mkdir /app/static && \
     chown -R appuser /app && \
     chmod 755 /app
