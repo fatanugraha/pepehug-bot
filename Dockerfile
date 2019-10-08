@@ -5,8 +5,8 @@ WORKDIR /go/src/build
 RUN dep ensure
 RUN go build -o main .
 FROM alpine
-RUN adduser -S -D -H -h /app appuser
-USER appuser
+# RUN adduser -S -D -H -h /app appuser
+# USER appuser
 COPY --from=builder /go/src/build/main /app/
 COPY --from=builder /go/src/build/assets /app/assets
 RUN mkdir /app/tmp
