@@ -12,6 +12,13 @@ var slackSecret = os.Getenv("SLACK_SECRET")
 var tokenAPI = os.Getenv("SLACK_API_TOKEN")
 var domain = os.Getenv("DOMAIN")
 
+func doHug(userID string, responseURL string) {
+	profile, _ := getProfileImage(userID)
+	downloadImage(fmt.Sprintf("/app/tmp/%s.jpg", userID), profile.Profile.Image512)
+	processImage(userID)
+	imageURL := fmt.Sprintf("%s/static/%s.png", domain, userID)
+	postResponseImage(responseURL, fmt.Sprintf("relax %s, everything will be alright", parts[1]), imageURL)
+}
 func webhookClientHandler(w http.ResponseWriter, r *http.Request) {
 	text := r.FormValue("text")
 	parts := strings.Split(text, " ")
@@ -25,11 +32,7 @@ func webhookClientHandler(w http.ResponseWriter, r *http.Request) {
 
 		userParts := strings.Split(parts[1], "|")
 		userID := userParts[0][2:]
-		profile, _ := getProfileImage(userID)
-		downloadImage(fmt.Sprintf("/app/tmp/%s.jpg", userID), profile.Profile.Image512)
-		processImage(userID)
-		imageURL := fmt.Sprintf("%s/static/%s.png", domain, userID)
-		postResponseImage(responseURL, fmt.Sprintf("relax %s, everything will be alright", parts[1]), imageURL)
+		go doHug(userID, responseURL)
 	} else {
 		postResponseText(responseURL, "command unrecognized")
 	}
