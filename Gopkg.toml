@@ -33,15 +33,3 @@
 [prune]
   go-tests = true
   unused-packages = true
-
-[[constraint]]
-  name = "github.com/gorilla/mux"
-  version = "1.7.3"
-
-[[constraint]]
-  name = "go.mongodb.org/mongo-driver"
-  version = "~1.0.0"
-
-[[constraint]]
-  name = "github.com/gorilla/websocket"
-  version = "1.4.1"
